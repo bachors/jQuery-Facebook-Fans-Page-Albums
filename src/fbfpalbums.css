@@ -1,0 +1,66 @@
+ul.fbfpalbums {
+	list-style: none;
+	list-style-type: none;
+	font-family: sans-serif;
+	font-size: 14px;
+	margin: 0px;
+	padding: 0px;
+	min-height: 130px;
+}
+
+ul.fbfpalbums li {
+	position: relative;
+	display: inline-block;
+	width: 130px;
+	height: 130px;
+	overflow: hidden;
+	padding: 0px;
+	cursor: pointer;
+	border: 1px solid #fff;
+	border-bottom-style: none;
+}
+
+ul.fbfpalbums img {
+	height: 130px !important;
+}
+
+ul.fbfpalbums .count {
+	background-color: rgba(0,0,0,0.6);
+	color: #fff;
+	position: absolute;
+	bottom: 0;
+	text-align: center;
+	padding: 5px;
+	display: block;
+	min-width: 34px;
+}
+
+ul.fbfpalbums .title {
+	background-color: rgba(0,0,0,0.6);
+	color: #fff;
+	position: absolute;
+	top: 0;
+	text-align: center;
+	padding: 5px;
+	display: block;
+	width: 100%;
+}
+
+.aload, .pload {
+	display: block;
+	text-align: center;
+	margin-top: 60px;
+	margin-bottom: 20px;
+}
+
+.aload a, .pload a, .fbfpback {
+	font-family: sans-serif;
+	padding: 15px;
+	background-color: #e9eaed;
+	color: #333;
+	cursor: pointer;
+}
+
+.fbfpback {
+	display: none;
+}
