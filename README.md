@@ -30,5 +30,3 @@ $(document).ready(function(){
 
 });
 &lt;/script&gt;</pre>
-
-<h3><a href="http://ibacor.com/demo/jquery-facebook-fans-page-albums">DEMO</a></h3>
