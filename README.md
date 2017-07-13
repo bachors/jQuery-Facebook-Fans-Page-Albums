@@ -15,18 +15,17 @@ Feed & browser your facebook fan page album photos.
 &lt;script type="text/javascript" src="src/fbfpalbums.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 $(document).ready(function(){
+	
+	// Setting fbfpalbums
+	$("#anu").fbfpalbums({
+		fp: "MemeComicIndonesi", // your username or id facebook fans page
+		token: "accessToken" // your facebook accessToken
+	});
 
-    // Setting fancybox
-    $(".fbfppopup").fancybox({   
-        openEffect : 'fade',
-        closeEffect : 'fade'
-    });
-    
-    // Setting fbfpalbums
-    $(".anu").fbfpalbums(
-        fp = "MemeComicIndonesi", // your username or id facebook fans page
-        token = "775908159169504|cYEIsh0rs25OQQC8Ex2hXyCOut4" // your facebook accessToken
-    );
-
+	// Setting fancybox
+	$(".fbfpalbums .popup").fancybox({   
+		openEffect : 'fade',
+		closeEffect : 'fade'
+	});
 });
 &lt;/script&gt;</pre>
