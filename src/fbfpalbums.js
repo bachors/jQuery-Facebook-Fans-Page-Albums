@@ -1,7 +1,7 @@
 /***********************************************************
 * #### jQuery Facebook Fans Page Albums v2.0 ####
 * Coded by Ican Bachors 2016.
-* http://ibacor.com/labs/jquery-facebook-fans-page-albums
+* https://github.com/bachors/jQuery-Facebook-Fans-Page-Albums/
 * Updates will be posted to this site.
 ***********************************************************/
 
