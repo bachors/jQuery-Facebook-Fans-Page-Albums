@@ -1,42 +1,42 @@
 /***********************************************************
-* #### jQuery Facebook Fans Page Albums v0.0.01 ####
+* #### jQuery Facebook Fans Page Albums v2.0 ####
 * Coded by Ican Bachors 2016.
 * http://ibacor.com/labs/jquery-facebook-fans-page-albums
 * Updates will be posted to this site.
 ***********************************************************/
 
-$.fn.fbfpalbums = function(g, h) {
-    $(this).html('<a class="fbfpback">Back</a><ul class="fbfpalbums"></ul>');
-    get_albums("html", "");
+$.fn.fbfpalbums = function(set) {
+    $(this).html('<div class="fbfpalbums"><div class="fbfpback"></div><div class="galleri"></div><div class="aload"><a class="amore">Load More</a></div><div class="pload"><a class="pmore">Load More</a></div></div>');
+	get_albums("html", "");
 
     function get_albums(d, e) {
         $.ajax({
-            url: 'https://graph.facebook.com/' + g + '/albums?access_token=' + h + '&fields=id,count,cover_photo,created_time,from,link,name,type,updated_time&after=' + e,
+            url: 'https://graph.facebook.com/v2.9/' + set.fp + '/albums?access_token=' + set.token + '&fields=id,count,cover_photo,created_time,from,link,name,type,updated_time&after=' + e,
             crossDomain: true,
             dataType: 'jsonp'
         }).done(function(b) {
-            var c = '';
+			var c = '';
             $.each(b.data, function(i, a) {
-                c += '<li class="fbfpalbum" data-albumnama="' + b.data[i].name + '" data-albumid="' + b.data[i].id + '"><img src="http://graph.facebook.com/' + b.data[i].cover_photo + '/picture"/><div class="title">' + b.data[i].name + '</div><div class="count">' + b.data[i].count + '</div></li>'
+                c += '<div class="thumbnail-wrapper"><a class="thumbnail" data-albumnama="' + b.data[i].name + '" data-albumid="' + b.data[i].id + '" style="background: url(http://graph.facebook.com/' + b.data[i].cover_photo.id + '/picture)"><div class="title">' + b.data[i].name + '</div><div class="count">' + b.data[i].count + '</div></a></div>'
             });
-            if (b.paging.cursors.before != b.paging.cursors.after && b.paging.next != null) {
-                c += '<div class="aload"><a class="amore">Load More</a></div>'
+            if (b.paging.cursors.before != b.paging.cursors.after && b.paging.next != undefined && b.paging.next != null) {
+                $(".aload").css("display", "block");
             }
             if (d == "html") {
-                $('.fbfpalbums').html(c)
+                $('.galleri').html(c)
             } else {
-                $('.fbfpalbums').append(c)
+                $('.galleri').append(c)
             }
-            $('.fbfpalbum').click(function() {
+            $('.thumbnail').click(function() {
                 var a = $(this).data("albumid"),
                     albumnama = $(this).data("albumnama");
                 get_photos("html", a, "");
                 $(".fbfpback").css("display", "block");
-                $(".fbfpback").html('Back / ' + albumnama);
+                $(".fbfpback").html('<b>' + b.data[0].from.name + '</b> / ' + albumnama);
                 return false
             });
             $('.amore').click(function() {
-                $(".aload").remove();
+                $(".aload").css("display", "none");
                 get_albums("", b.paging.cursors.after);
                 return false
             })
@@ -45,24 +45,25 @@ $.fn.fbfpalbums = function(g, h) {
 
     function get_photos(d, e, f) {
         $.ajax({
-            url: 'https://graph.facebook.com/' + e + '/photos?access_token=' + h + '&fields=id,created_time,from,height,icon,images,link,name,picture,updated_time,width,source&after=' + f,
+            url: 'https://graph.facebook.com/v2.9/' + e + '/photos?access_token=' + set.token + '&fields=id,created_time,from,height,icon,images,link,name,picture,updated_time,width,source&after=' + f,
             crossDomain: true,
             dataType: 'jsonp'
         }).done(function(b) {
             var c = '';
             $.each(b.data, function(i, a) {
-                c += '<li class="fbfpphoto"><a href="' + b.data[i].images[0].source + '" class="fbfppopup" rel="fbfppopup" title="' + (b.data[i].name != null ? b.data[i].name : "") + '"><img src="' + b.data[i].picture + '"/></a><div class="count">' + relative_time(b.data[i].created_time) + '</div></li>'
+				var t = b.data[i].images.length - 1;
+                c += '<div class="thumbnail-wrapper"><a href="' + b.data[i].images[0].source + '" class="thumbnail popup" rel="popup" title="' + (b.data[i].name != undefined && b.data[i].name != null ? b.data[i].name : 'By ' + b.data[i].from.name) + '"style="background: url(' + b.data[i].images[t].source + ')"><div class="title"></div><div class="count">' + relative_time(b.data[i].created_time) + '</div></a></div>'
             });
-            if (b.paging.cursors.before != b.paging.cursors.after && b.paging.next != null) {
-                c += '<div class="pload"><a class="pmore">Load More</a></div>'
+            if (b.paging.cursors.before != b.paging.cursors.after && b.paging.next != undefined && b.paging.next != null) {
+                $(".pload").css("display", "block");
             }
             if (d == "html") {
-                $('.fbfpalbums').html(c)
+                $('.galleri').html(c)
             } else {
-                $('.fbfpalbums').append(c)
+                $('.galleri').append(c)
             }
             $('.pmore').click(function() {
-                $(".pload").remove();
+                $(".pload").css("display", "none");
                 get_photos("", e, b.paging.cursors.after);
                 return false
             });
