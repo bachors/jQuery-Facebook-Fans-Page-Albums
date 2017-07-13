@@ -5,7 +5,6 @@
 }
 
 .fbfpalbums .galleri {
-	font-size: 12px !important;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap
@@ -33,6 +32,7 @@
 }
 
 .fbfpalbums .galleri .count {
+	font-size: 0.8em !important;
 	background-color: rgba(0,0,0,0.6);
 	color: #fff;
 	position: absolute;
@@ -44,6 +44,7 @@
 }
 
 .fbfpalbums .galleri .title {
+	font-size: 1em !important;
 	background-color: rgba(0,0,0,0.6);
 	color: #fff;
 	position: absolute;
